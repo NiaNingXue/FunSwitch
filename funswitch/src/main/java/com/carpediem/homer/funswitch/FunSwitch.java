@@ -129,6 +129,7 @@ public class FunSwitch extends View implements ValueAnimator.AnimatorUpdateListe
     }
 
     private void drawBackground(Canvas canvas) {
+        mPaint.setAntiAlias(true);
         mPaint.setColor(mCurrentColor);
         mPaint.setStyle(Paint.Style.FILL);
         canvas.drawPath(mBackgroundPath,mPaint);
