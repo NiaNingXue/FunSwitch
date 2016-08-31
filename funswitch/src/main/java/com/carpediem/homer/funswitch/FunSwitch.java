@@ -278,6 +278,9 @@ public class FunSwitch extends View implements ValueAnimator.AnimatorUpdateListe
                     startOpenAnimation();
                     mIsOpen = true;
                 }
+                if(mListener!=null){
+                    mListener.onCheckedChanged(mIsOpen);
+                }
                 return true;
         }
         return super.onTouchEvent(event);
@@ -351,6 +354,11 @@ public class FunSwitch extends View implements ValueAnimator.AnimatorUpdateListe
         mIsOpen = open;
         refreshState();
     }
+
+    public boolean getState(){
+        return mIsOpen;
+    }
+
     public void refreshState() {
         mCurrentColor = mIsOpen ? mOnBackgroundColor : mOffBackgroundColor;
         invalidate();
@@ -403,5 +411,15 @@ public class FunSwitch extends View implements ValueAnimator.AnimatorUpdateListe
                 return new SavedState[0];
             }
         };
+    }
+
+    private OnCheckedChangeListener mListener;
+
+    public void addOnCheckedChangeListenre(OnCheckedChangeListener listener){
+        mListener = listener;
+    }
+
+    public interface OnCheckedChangeListener{
+        void onCheckedChanged(boolean checked);
     }
 }
